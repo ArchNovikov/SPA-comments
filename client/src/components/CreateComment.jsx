@@ -4,9 +4,11 @@ const CreateComment = (props) => {
     return (
         <div>
           <form>
-              <input className="inputComment"/>
-              <input className="inputComment"/>
-              <button className="createCommentButton">Send</button>
+              <input className="inputComment" placeholder="Nickname*"/>
+              <input className="inputComment" placeholder="Your Email*"/>
+              <input className="inputComment" placeholder="Your home page"/>
+              <input className="inputComment" placeholder="Comment* (txt,jpg,png,doc)"/>
+              <button className="createCommentButton">Send comment</button>
           </form>
         </div>
     );

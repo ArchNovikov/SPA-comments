@@ -6,6 +6,7 @@ const CreateComment = (props) => {
           <form>
               <input className="inputComment"/>
               <input className="inputComment"/>
+              <button className="createCommentButton">Send</button>
           </form>
         </div>
     );

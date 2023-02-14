@@ -1,12 +1,25 @@
-const {Sequelize} = require('sequelize')
+const sequelize = require('../db')
+const {DataTypes} = require('sequelize')
 
-module.exports = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-        dialect: 'postgres',
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT
-    }
-)
+const User = sequelize.define('user', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    username: {type: DataTypes.STRING, unique: true},
+    email: {type: DataTypes.STRING, unique: true},
+    homePage: {type: DataTypes.STRING}
+})
+
+const Comment = sequelize.define('comment', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    text: {type: DataTypes.STRING, allowNull: false}
+})
+
+Comment.hasOne(User)
+User.belongsTo(Comment)
+
+User.hasMany(Comment)
+Comment.belongsTo(User)
+
+module.exports = {
+    User,
+    Comment
+}

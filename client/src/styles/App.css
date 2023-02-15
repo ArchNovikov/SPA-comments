@@ -7,5 +7,20 @@
 
 .inputComment {
     display: flex;
-    padding: 15px;
+    padding: 5px;
+    height: 30px;
+    border: 2px solid Thistle;
+    background-color: WhiteSmoke;
+}
+
+.createCommentButton {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    font-size: 1.2vw;
+    color: DimGrey;
+    background-color: Thistle;
+    padding: 5px;
+    margin-top: 3px;
+    border: 2px solid DimGrey
 }

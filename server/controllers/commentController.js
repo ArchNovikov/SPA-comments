@@ -1,18 +1,32 @@
-const {Comment, User} = require('../models/models')
+const {Comment, User} = require('../models/models');
+const uuid = require('uuid');
+const path = require('path');
 
 class commentController {
 
     async create(req, res) {
-        const user = await User.findOne({ where: {username: req.body.username, email: req.body.email} });
-        console.log(user)
-        if(user) {
-            await Comment.create({text: req.body.text, userId: user.id});
+        const {username, email, homePage, commentText} = req.body;
+        const {file} = req.files;
+
+        let fileName = '';
+        if(file.name.slice(-3) === 'txt') {
+            fileName = uuid.v4() + '.txt'
         } else {
-            const user = await User.create({username: req.body.username, email: req.body.email, homePage: req.body.homePage})
-            await Comment.create({text: req.body.text, userId: user.id});
+            fileName = uuid.v4() + '.jpg'
         }
 
-        return res.json(req.body);
+        await file.mv(path.resolve(__dirname, '..', 'static', fileName))
+
+        let user = await User.findOne({ where: {username, email} });
+
+        if(user) {
+            await Comment.create({commentText, userId: user.id, file: fileName});
+        } else {
+            const user = await User.create({username, email, homePage});
+            await Comment.create({commentText, userId: user.id, file: fileName});
+        }
+
+        return res.json(user);
     }
 
     async getAll(req, res) {
@@ -21,7 +35,17 @@ class commentController {
     }
 
     async getOne(req, res) {
-        return res.json(req.params);
+        const id = req.params.id
+        const comment = await Comment.findOne({ where: {id} });
+        const user = await User.findOne({where: {id: comment.userId}});
+
+        const result = {
+            comment: comment.commentText,
+            file: comment.file,
+            username: user.username
+        };
+
+        return res.json(result);
     }
 
 }

@@ -10,7 +10,8 @@ const User = sequelize.define('user', {
 
 const Comment = sequelize.define('comment', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    text: {type: DataTypes.STRING, allowNull: false}
+    commentText: {type: DataTypes.STRING, allowNull: false},
+    file: {type: DataTypes.STRING}
 })
 
 Comment.hasOne(User)

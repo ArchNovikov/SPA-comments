@@ -7,20 +7,51 @@
 
 .inputComment {
     display: flex;
-    padding: 5px;
-    height: 30px;
-    border: 2px solid Thistle;
-    background-color: WhiteSmoke;
+    width: 250px;
+    height: 40px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    outline: none;
+    border: none;
+    background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, #B2D1A0, #B2D1A0), #B2D1A0;
+    border-radius: 20px;
+}
+
+.inputCommentField {
+    display: flex;
+    width: 250px;
+    height: 140px;
+    margin-bottom: 5px;
+    margin-left: 50px;
+    outline: none;
+    border: none;
+    background: #E1F8FF
 }
 
 .createCommentButton {
     display: flex;
-    height: fit-content;
-    width: fit-content;
-    font-size: 1.2vw;
-    color: DimGrey;
-    background-color: Thistle;
-    padding: 5px;
-    margin-top: 3px;
-    border: 2px solid DimGrey
+    width: 250px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 50px;
+    align-items: center;
+    justify-content: center;
+    background: #6FC8E4;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.createSendCommentBlock {
+    margin: auto;
+    display: flex;
+    width: 350px;
+    height: 450px;
+    background: #A3D6F2;
 }

@@ -49,8 +49,9 @@
 }
 
 .createSendCommentBlock {
-    margin: auto;
-    display: flex;
+    /*margin: auto;*/
+    /*display: flex;*/
+    margin-left: 300px;
     width: 350px;
     height: 450px;
     background: #A3D6F2;

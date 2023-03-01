@@ -56,3 +56,11 @@
     height: 450px;
     background: #A3D6F2;
 }
+
+.commentBlock {
+    display: flex;
+    border: 0;
+    width: 1000px;
+    margin-left: 100px;
+    margin-bottom: 10px;
+}

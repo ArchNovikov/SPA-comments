@@ -1,11 +1,13 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 
 const Comment = (props) => {
     return (
-        <div>
-            <h2>{ props.name }</h2>
-            <p>{ props.text }</p>
-        </div>
+        <Card className="commentBlock">
+            <Card.Body>
+                <Card.Header><span style={{fontWeight: "bolder"}}>{props.name}</span> {props.date}</Card.Header>
+                <Card.Text style={{marginLeft: 10}}>{props.text}</Card.Text></Card.Body>
+        </Card>
     );
 };
 

@@ -6,23 +6,30 @@ class commentController {
 
     async create(req, res) {
         const {username, email, homePage, commentText} = req.body;
-        const {file} = req.files;
-
         let fileName = '';
-        if(file.name.slice(-3) === 'txt') {
-            fileName = uuid.v4() + '.txt'
-        } else {
-            fileName = uuid.v4() + '.jpg'
+
+        try {
+            const {file} = req.files;
+
+            if (file.name.slice(-3) === 'txt') {
+                fileName = uuid.v4() + '.txt';
+            } else {
+                fileName = uuid.v4() + '.jpg';
+            }
+
+            await file.mv(path.resolve(__dirname, '..', 'static', fileName));
+        } catch (e) {
+            console.log(e);
         }
 
-        await file.mv(path.resolve(__dirname, '..', 'static', fileName))
 
-        let user = await User.findOne({ where: {username, email} });
+        let user = await User.findOne({where: {username, email}});
 
-        if(user) {
+        try {
             await Comment.create({commentText, userId: user.id, file: fileName});
-        } else {
-            const user = await User.create({username, email, homePage});
+        } catch (e) {
+            console.log(e);
+            user = await User.create({username, email, homePage});
             await Comment.create({commentText, userId: user.id, file: fileName});
         }
 
@@ -30,13 +37,13 @@ class commentController {
     }
 
     async getAll(req, res) {
-        const comments = await Comment.findAll()
+        const comments = await Comment.findAll();
         return res.json(comments);
     }
 
     async getOne(req, res) {
-        const id = req.params.id
-        const comment = await Comment.findOne({ where: {id} });
+        const id = req.params.id;
+        const comment = await Comment.findOne({where: {id}});
         const user = await User.findOne({where: {id: comment.userId}});
 
         const result = {
